@@ -1,0 +1,10 @@
+version: '3'
+services:
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9101:9101"
+    environment:
+      - DATABASE_URL=postgresql://postgres:base_arquitectura@admin.rayapim.site:54321/zidko
