@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 import uuid
 import uvicorn
 
@@ -62,4 +62,4 @@ async def delete_product(product_id: str):
     raise HTTPException(status_code=404, detail="Product not found")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="141.148.55.107", port=9101)
+    uvicorn.run(app, host="0.0.0.0", port=9101)
