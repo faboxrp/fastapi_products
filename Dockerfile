@@ -1,22 +1,20 @@
-# Usa una imagen oficial de Python como base
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Establece el directorio de trabajo
+# Set the working directory in the container
 WORKDIR /app
 
-# Copia los archivos de requisitos y los instala
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Copia el resto del código de la aplicación
-COPY . .
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir fastapi uvicorn
 
-# Copia el script de entrada
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-# Expone el puerto en el que la aplicación correrá
+# Make port 9101 available to the world outside this container
 EXPOSE 9101
 
-# Usa el script de entrada
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Define environment variable
+ENV PORT=9101
+
+# Run app.py when the container launches
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9101"]
