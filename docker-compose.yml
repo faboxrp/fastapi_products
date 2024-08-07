@@ -1,10 +1,9 @@
-version: '3'
+# version: '3.8'
+
 services:
-  myapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  fastapi:
+    build: .
     ports:
       - "9101:9101"
     environment:
-      - DATABASE_URL=postgresql://postgres:base_arquitectura@admin.rayapim.site:54321/zidko
+      - PORT=9101
